@@ -656,3 +656,16 @@ button:disabled {
   object-fit: contain;
   padding: 6px;
 }
+
+/* ===== Ukuran sepatu ===== */
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.size-chip {
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  font-size: 13px;
+}

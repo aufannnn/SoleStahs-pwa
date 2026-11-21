@@ -44,6 +44,22 @@ export default function SneakerDetail({ id, onOpenBrand }) {
               <td>{data.categories?.name || '-'}</td>
             </tr>
             <tr>
+              <td>Ukuran</td>
+              <td>
+                {data.sizes ? (
+                  <div className="sizes">
+                    {data.sizes.split(',').map((s) => s.trim()).filter(Boolean).map((s) => (
+                      <span key={s} className="size-chip">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  '-'
+                )}
+              </td>
+            </tr>
+            <tr>
               <td>Tanggal Rilis</td>
               <td>{formatDate(data.release_date)}</td>
             </tr>

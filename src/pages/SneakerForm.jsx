@@ -8,6 +8,7 @@ const EMPTY_FORM = {
   name: '',
   brand_id: '',
   colorway: '',
+  sizes: '',
   category_id: '',
   price: '',
   release_date: '',
@@ -35,6 +36,7 @@ export default function SneakerForm({ id, onDone }) {
           name: data.name || '',
           brand_id: data.brand_id || '',
           colorway: data.colorway || '',
+          sizes: data.sizes || '',
           category_id: data.category_id || '',
           price: data.price ?? '',
           release_date: data.release_date || '',
@@ -110,6 +112,16 @@ export default function SneakerForm({ id, onDone }) {
         <label>
           Colorway
           <input name="colorway" value={form.colorway} onChange={handleChange} />
+        </label>
+
+        <label>
+          Ukuran Tersedia
+          <input
+            name="sizes"
+            placeholder="Contoh: 39, 40, 41, 42"
+            value={form.sizes}
+            onChange={handleChange}
+          />
         </label>
 
         <label>
