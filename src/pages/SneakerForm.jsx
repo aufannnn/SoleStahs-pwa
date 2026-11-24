@@ -16,6 +16,9 @@ const EMPTY_FORM = {
   description: '',
 }
 
+// Ukuran wajib angka yang dipisah koma, contoh: "39, 40, 41" (boleh setengah: "42.5")
+const SIZES_PATTERN = /^\d{1,2}(\.5)?(\s*,\s*\d{1,2}(\.5)?)*$/
+
 // id kosong = mode tambah, id ada = mode edit
 export default function SneakerForm({ id, onDone }) {
   const isEdit = Boolean(id)
@@ -59,10 +62,19 @@ export default function SneakerForm({ id, onDone }) {
       return
     }
 
+    // cek format ukuran (kalau diisi)
+    const sizes = form.sizes.trim()
+    if (sizes && !SIZES_PATTERN.test(sizes)) {
+      setError('Format ukuran salah. Pisahkan dengan koma, contoh: 39, 40, 41')
+      return
+    }
+
     // string kosong dikirim sebagai null, harga diubah ke angka
     const payload = {
       ...form,
       name: form.name.trim(),
+      // rapikan jadi "39, 40, 41"
+      sizes: sizes ? sizes.split(',').map((s) => s.trim()).join(', ') : '',
       price: form.price === '' ? null : Number(form.price),
     }
     for (const key in payload) {
@@ -122,6 +134,7 @@ export default function SneakerForm({ id, onDone }) {
             value={form.sizes}
             onChange={handleChange}
           />
+          <small className="form-hint">Pisahkan tiap ukuran dengan koma (,)</small>
         </label>
 
         <label>
