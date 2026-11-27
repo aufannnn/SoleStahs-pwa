@@ -29,6 +29,8 @@ export default function Catalog({ onOpenSneaker }) {
     const price = (s, empty) => (s.price === null ? empty : Number(s.price))
     if (sort === 'low') list.sort((a, b) => price(a, Infinity) - price(b, Infinity))
     if (sort === 'high') list.sort((a, b) => price(b, -1) - price(a, -1))
+    if (sort === 'az') list.sort((a, b) => a.name.localeCompare(b.name))
+    if (sort === 'za') list.sort((a, b) => b.name.localeCompare(a.name))
     return list
   }, [data, search, category, sort])
 
@@ -62,6 +64,8 @@ export default function Catalog({ onOpenSneaker }) {
           <option value="newest">Terbaru</option>
           <option value="low">Harga: Rendah - Tinggi</option>
           <option value="high">Harga: Tinggi - Rendah</option>
+          <option value="az">Nama: A - Z</option>
+          <option value="za">Nama: Z - A</option>
         </select>
       </div>
 
